@@ -209,6 +209,18 @@
     </style>
 </head>
 <body>
+<!-- 密码登录界面 -->
+<div id="loginForm" style="position:fixed;inset:0;background:#fff0f6;display:flex;align-items:center;justify-content:center;z-index:999;">
+    <div style="background:#fff;padding:30px;border-radius:20px;border:2px solid #ffb9d3;text-align:center;">
+        <h3 style="color:#a83b6b;margin-bottom:20px;">请输入访问密码</h3>
+        <input type="password" id="pwdInput" placeholder="悄悄告诉你是你大写的农历生日哦~" style="padding:8px 12px;border:1px solid #ffc8e0;border-radius:10px;margin-bottom:15px;width:200px;">
+        <br>
+        <button onclick="checkPwd()" style="padding:8px 20px;background:#ff87b2;color:white;border:none;border-radius:10px;cursor:pointer;">确认</button>
+    </div>
+</div>
+
+<!-- 主内容区域（默认隐藏） -->
+<div id="content" style="display:none;">
 <div class="candy" style="left:5%;top:10%;">🍩</div>
 <div class="candy" style="right:7%;top:14%;animation-delay:0.8s;">🍭</div>
 <div class="candy" style="left:12%;top:65%;animation-delay:1.5s;">🍫</div>
@@ -275,7 +287,6 @@ YT3462595117338<br>
 
 <audio id="bgMusic" loop preload="auto">
     <source src="music.mp3" type="audio/mpeg">
-
 
 <script>
 // 爱心飘落
@@ -360,5 +371,24 @@ voiceAudio.addEventListener('ended', function(){
     bgMusic.play();
 });
 </script>
+</div>
+
+<!-- 密码验证脚本 -->
+<script>
+const correctPassword = "四月廿五"; // 修改这里的双引号内容，换成你自己的密码
+function checkPwd() {
+  const input = document.getElementById('pwdInput').value;
+  if (input === correctPassword) {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('content').style.display = 'block';
+  } else {
+    alert("啊哦，错了呦(￣▽￣)~*");
+  }
+}
+document.getElementById('pwdInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') checkPwd();
+});
+</script>
+
 </body>
 </html>

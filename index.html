@@ -336,13 +336,17 @@ closeNewLetter.onclick = function(){
     mainWrap.style.display = 'block';
 }
 </script>
-<audio id="bgMusic" loop>
- <source src="https://qq123456321.github.io/PP-birthday/music.mp3" type="audio/mpeg">
+<!-- 背景音乐：music.mp3 -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+
 
 <script>
 const bgMusic = document.getElementById('bgMusic');
-document.addEventListener('click', () => {
-  bgMusic.play().catch(e=>console.log("播放拦截：",e));
+// 第一次点击页面，开启背景音乐（浏览器必须要用户点一下才让出声）
+document.addEventListener('click', function initAudio() {
+  bgMusic.play().catch(e => console.log('bg播放失败：', e));
+  document.removeEventListener('click', initAudio);
 }, { once: true });
 </script>
 </body>

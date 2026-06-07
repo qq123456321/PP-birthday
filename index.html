@@ -260,42 +260,42 @@ YT3462595117338<br>
 准备好了吗，感受神秘力量，你会在同一个地方接收到这份神秘礼物~<br>
 ദ്ദി˶ｰ̀֊ｰ́ )✧</p >
 
-        <button id="voiceBtn" style="padding:6px 14px;margin:15px 0;border:none;border-radius:20px;background:#ff87b2;color:#fff;cursor:pointer;font-family:幼圆;">
-            🔊 播放专属语音
-        </button>
-        <audio id="voiceAudio">
-            <source src="https://qq123456321.github.io/PP-birthday/123.mp3" type="audio/mpeg">
-        
+<button id="voiceBtn" style="padding:6px 14px;margin:15px 0;border:none;border-radius:20px;background:#ff87b2;color:#fff;cursor:pointer;font-family:幼圆;">
+    🔊 播放专属语音
+</button>
 
-        <script>
-            const bgMusic = document.getElementById('bgMusic');
-            const voiceAudio = document.getElementById('voiceAudio');
-            const voiceBtn = document.getElementById('voiceBtn');
-            let bgIsPlaying = false;
+<audio id="voiceAudio">
+    <source src="https://qq123456321.github.io/PP-birthday/123.mp3" type="audio/mpeg">
 
-            voiceBtn.addEventListener('click', function(){
-                if(!voiceAudio.paused) return;
-                bgIsPlaying = !bgMusic.paused;
-                if(bgIsPlaying){
-                    bgMusic.pause();
-                }
-                voiceAudio.currentTime = 0;
-                voiceAudio.play();
-            });
 
-            voiceAudio.addEventListener('ended', function(){
-                if(bgIsPlaying){
-                    bgMusic.play();
-                }
-            });
-        </script>
+<script>
+    const bgMusic = document.getElementById('bgMusic');
+    const voiceAudio = document.getElementById('voiceAudio');
+    const voiceBtn = document.getElementById('voiceBtn');
+    let bgIsPlaying = false;
 
-        <button class="close" id="closeNewLetter">看完啦</button>
+    voiceBtn.addEventListener('click', function(){
+        if(!voiceAudio.paused) return;
+        bgIsPlaying = !bgMusic.paused;
+        if(bgIsPlaying){
+            bgMusic.pause();
+        }
+        voiceAudio.currentTime = 0;
+        voiceAudio.play();
+    });
+
+    voiceAudio.addEventListener('ended', function(){
+        if(bgIsPlaying){
+            bgMusic.play();
+        }
+    });
+</script>
+
+<button class="close" id="closeNewLetter">看完啦</button>
     </div>
 </div>
 
 <script>
-
 function createHeart(){
     const heart = document.createElement('div');
     heart.className = 'heart';
@@ -321,32 +321,33 @@ const closeNewLetter = document.getElementById('closeNewLetter');
 openLetter.onclick = ()=> letterModal.style.display = 'flex';
 openGift.onclick = ()=> giftModal.style.display = 'flex';
 
-closeGift.onclick = function(){
-    giftModal.style.display = 'none';
-    letterModal.style.display = 'none';
-    mainWrap.style.display = 'none';
+closeGift.onclick = function(){    
+    giftModal.style.display = 'none';    
+    letterModal.style.display = 'none';    
+    mainWrap.style.display = 'none';    
     bigMoreBtn.style.display = 'block';
 }
 
 bigMoreBtn.onclick = ()=> newLetterModal.style.display = 'flex';
 
-closeNewLetter.onclick = function(){
-    newLetterModal.style.display = 'none';
-    bigMoreBtn.style.display = 'none';
+closeNewLetter.onclick = function(){    
+    newLetterModal.style.display = 'none';    
+    bigMoreBtn.style.display = 'none';    
     mainWrap.style.display = 'block';
 }
 </script>
+
 <!-- 背景音乐：music.mp3 -->
-<audio id="bgMusic" loop preload="auto">
-  <source src="music.mp3" type="audio/mpeg">
+<audio id="bgMusic" loop preload="auto">  
+    <source src="music.mp3" type="audio/mpeg">
 
 
 <script>
 const bgMusic = document.getElementById('bgMusic');
-// 第一次点击页面，开启背景音乐（浏览器必须要用户点一下才让出声）
-document.addEventListener('click', function initAudio() {
-  bgMusic.play().catch(e => console.log('bg播放失败：', e));
-  document.removeEventListener('click', initAudio);
+// 首次点击页面触发背景音乐播放
+document.addEventListener('click', function initAudio() {  
+    bgMusic.play().catch(e => console.log('bg播放失败：', e));  
+    document.removeEventListener('click', initAudio);
 }, { once: true });
 </script>
 </body>

@@ -213,7 +213,7 @@
 <div id="loginForm" style="position:fixed;inset:0;background:#fff0f6;display:flex;align-items:center;justify-content:center;z-index:999;">
     <div style="background:#fff;padding:30px;border-radius:20px;border:2px solid #ffb9d3;text-align:center;">
         <h3 style="color:#a83b6b;margin-bottom:20px;">请输入访问密码</h3>
-        <input type="password" id="pwdInput" placeholder="密码是你大写的农历生日哦~" style="padding:8px 12px;border:1px solid #ffc8e0;border-radius:10px;margin-bottom:15px;width:200px;">
+        <input type="password" id="pwdInput" placeholder="悄悄告诉你，密码是你的农历生日哦~" style="padding:8px 12px;border:1px solid #ffc8e0;border-radius:10px;margin-bottom:15px;width:200px;">
         <br>
         <button onclick="checkPwd()" style="padding:8px 20px;background:#ff87b2;color:white;border:none;border-radius:10px;cursor:pointer;">确认</button>
     </div>
@@ -375,7 +375,7 @@ voiceAudio.addEventListener('ended', function(){
 
 <!-- 密码验证脚本 -->
 <script>
-const correctPassword = "四月廿五"; // 修改这里的双引号内容，换成你自己的密码
+const correctPassword = "0425"; // 修改这里的双引号内容，换成你自己的密码
 function checkPwd() {
   const input = document.getElementById('pwdInput').value;
   if (input === correctPassword) {

@@ -312,6 +312,61 @@ const openLetter = document.getElementById('openLetter');
 const letterModal = document.getElementById('letterModal');
 const openGift = document.getElementById('openGift');
 const giftModal = document.getElementById('giftModal');
+const closeGift = document.getEl<button id="voiceBtn" style="padding:6px 14px;margin:15px 0;border:none;border-radius:20px;background:#ff87b2;color:#fff;cursor:pointer;font-family:幼圆;">
+    🔊 播放专属语音
+</button>
+
+<!-- 专属语音音频 补全闭合标签 -->
+<audio id="voiceAudio">
+    <source src="https://qq123456321.github.io/PP-birthday/123.mp3" type="audio/mpeg">
+
+
+<script>
+const bgMusic = document.getElementById('bgMusic');
+const voiceAudio = document.getElementById('voiceAudio');
+const voiceBtn = document.getElementById('voiceBtn');
+let bgIsPlaying = false;
+
+voiceBtn.addEventListener('click', function(){
+    if(!voiceAudio.paused) return;
+    bgIsPlaying = !bgMusic.paused;
+    if(bgIsPlaying){
+        bgMusic.pause();
+    }
+    voiceAudio.currentTime = 0;
+    voiceAudio.play();
+});
+
+voiceAudio.addEventListener('ended', function(){
+    if(bgIsPlaying){
+        bgMusic.play();
+    }
+});
+</script>
+
+<button class="close" id="closeNewLetter">看完啦</button>
+</div>
+</div>
+
+<script>
+// 爱心飘落效果
+function createHeart(){
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerText = '❤';
+    heart.style.left = Math.random()*100 + '%';
+    heart.style.fontSize = Math.random()*20+12+'px';
+    heart.style.animationDuration = Math.random()*3+3+'s';
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000)
+}
+setInterval(createHeart,300)
+
+// 弹窗控制逻辑
+const openLetter = document.getElementById('openLetter');
+const letterModal = document.getElementById('letterModal');
+const openGift = document.getElementById('openGift');
+const giftModal = document.getElementById('giftModal');
 const closeGift = document.getElementById('closeGift');
 const mainWrap = document.getElementById('mainWrap');
 const bigMoreBtn = document.getElementById('bigMoreBtn');
@@ -337,16 +392,16 @@ closeNewLetter.onclick = function(){
 }
 </script>
 
-<!-- 背景音乐：music.mp3 -->
+<!-- 背景音乐 补全闭合标签 -->
 <audio id="bgMusic" loop preload="auto">  
     <source src="music.mp3" type="audio/mpeg">
 
 
 <script>
 const bgMusic = document.getElementById('bgMusic');
-// 首次点击页面触发背景音乐播放
+// 页面任意点击，自动播放背景音乐
 document.addEventListener('click', function initAudio() {  
-    bgMusic.play().catch(e => console.log('bg播放失败：', e));  
+    bgMusic.play().catch(e => console.log('背景音乐播放失败：', e));  
     document.removeEventListener('click', initAudio);
 }, { once: true });
 </script>

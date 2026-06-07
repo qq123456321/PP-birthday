@@ -140,14 +140,14 @@
             background:#ff87b2;
         }
         .close{
-            margin-top:25px;
-            padding:8px 24px;
-            border:0;
+            padding:6px 14px;
+            margin:15px 8px;
+            border:none;
+            border-radius:20px;
             background:#ffacc9;
-            color:white;
-            border-radius:30px;
+            color:#fff;
             cursor:pointer;
-            font-family:"幼圆";
+            font-family:幼圆;
         }
         .gift-box{
             position:fixed;
@@ -260,16 +260,18 @@ YT3462595117338<br>
 准备好了吗，感受神秘力量，你会在同一个地方接收到这份神秘礼物~<br>
 ദ്ദി˶ｰ̀֊ｰ́ )✧</p>
 
-        <button id="voiceBtn" style="padding:6px 14px;margin:15px 0;border:none;border-radius:20px;background:#ff87b2;color:#fff;cursor:pointer;font-family:幼圆;">
+        <!-- 两个按钮并排摆放 -->
+        <button id="voiceBtn" style="padding:6px 14px;margin:15px 8px;border:none;border-radius:20px;background:#ff87b2;color:#fff;cursor:pointer;font-family:幼圆;">
             🔊 播放专属语音
         </button>
+        <button class="close" id="closeNewLetter">看完啦</button>
+
         <audio id="voiceAudio">
             <source src="https://qq123456321.github.io/PP-birthday/123.mp3" type="audio/mpeg">
         
     </div>
 </div>
 
-<!-- 背景音乐（已补全闭合标签） -->
 <audio id="bgMusic" loop preload="auto">
     <source src="music.mp3" type="audio/mpeg">
 
@@ -297,6 +299,7 @@ const closeGift = document.getElementById('closeGift');
 const mainWrap = document.getElementById('mainWrap');
 const bigMoreBtn = document.getElementById('bigMoreBtn');
 const newLetterModal = document.getElementById('newLetterModal');
+const closeNewLetter = document.getElementById('closeNewLetter');
 
 openLetter.onclick = ()=> letterModal.style.display = 'flex';
 openGift.onclick = ()=> giftModal.style.display = 'flex';
@@ -310,13 +313,20 @@ closeGift.onclick = function(){
 
 bigMoreBtn.onclick = ()=> newLetterModal.style.display = 'flex';
 
-// ========== 音频控制（重点修复） ==========
+// 点击【看完啦】关闭弹窗，返回首页
+closeNewLetter.onclick = function(){
+    newLetterModal.style.display = 'none';
+    bigMoreBtn.style.display = 'none';
+    mainWrap.style.display = 'block';
+};
+
+// 音频控制
 const bgMusic = document.getElementById('bgMusic');
 const voiceAudio = document.getElementById('voiceAudio');
 const voiceBtn = document.getElementById('voiceBtn');
 let bgIsPlaying = false;
 
-// 点击页面任意位置 → 播放背景音乐（浏览器必须这样才放行）
+// 页面点击唤醒背景音乐
 document.addEventListener('click', function initAudio() {
     bgMusic.play()
     .then(() => {
@@ -325,31 +335,25 @@ document.addEventListener('click', function initAudio() {
     })
     .catch(e => {
         console.error('❌ 背景音乐播放失败：', e);
-        alert('背景音乐加载失败，请检查是否上传了 music.mp3');
     });
     document.removeEventListener('click', initAudio);
 }, { once: true });
 
-// 播放专属语音：暂停背景音乐
+// 播放专属语音
 voiceBtn.addEventListener('click', function(){
     if(!voiceAudio.paused) return;
     bgIsPlaying = !bgMusic.paused;
     if(bgIsPlaying){
         bgMusic.pause();
-        console.log('🔇 背景音乐暂停');
     }
     voiceAudio.currentTime = 0;
-    voiceAudio.play()
-    .then(() => console.log('🔊 专属语音播放'))
-    .catch(e => console.error('专属语音播放失败：', e));
+    voiceAudio.play();
 });
 
-// 语音结束 → 恢复背景音乐
+// 语音结束恢复背景音乐
 voiceAudio.addEventListener('ended', function(){
-    console.log('专属语音结束');
     if(bgIsPlaying){
-        bgMusic.play()
-        .then(() => console.log('▶️ 背景音乐恢复'));
+        bgMusic.play();
     }
 });
 </script>

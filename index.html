@@ -217,7 +217,7 @@
 
 <div class="wrap" id="mainWrap">
     <div class="bow">🎀🎀🎀</div>
-    <h1>祝我们的李萍萍小公主，生日快乐！</h1>
+    <h1>祝我们的李萍萍小公主`!`生日快乐！</h1>
     <div class="text">
         愿所有美好如期而至💖<br>
         平安喜乐，万事顺遂<br>
@@ -266,8 +266,8 @@ YT3462595117338<br>
         </button>
         <button class="close" id="closeNewLetter">看完啦</button>
 
-        <audio id="voiceAudio">
-            <source src="https://qq123456321.github.io/PP-birthday/123.mp3" type="audio/mpeg">
+       <audio id="voiceAudio" preload="auto">
+    <source src="https://qq123456321.github.io/PP-birthday/123.mp3" type="audio/mpeg">
         
     </div>
 </div>
@@ -324,14 +324,13 @@ closeNewLetter.onclick = function(){
 const bgMusic = document.getElementById('bgMusic');
 const voiceAudio = document.getElementById('voiceAudio');
 const voiceBtn = document.getElementById('voiceBtn');
-let bgIsPlaying = false;
+let voicePlaying = false;
 
-// 页面点击唤醒背景音乐
+// 页面点击唤醒背景音乐（保留原有逻辑）
 document.addEventListener('click', function initAudio() {
     bgMusic.play()
     .then(() => {
         console.log('✅ 背景音乐开始播放');
-        bgIsPlaying = true;
     })
     .catch(e => {
         console.error('❌ 背景音乐播放失败：', e);
@@ -339,22 +338,25 @@ document.addEventListener('click', function initAudio() {
     document.removeEventListener('click', initAudio);
 }, { once: true });
 
-// 播放专属语音
+// 播放专属语音（修复：防重复点击、音频中断）
 voiceBtn.addEventListener('click', function(){
-    if(!voiceAudio.paused) return;
-    bgIsPlaying = !bgMusic.paused;
-    if(bgIsPlaying){
-        bgMusic.pause();
-    }
+    if (voicePlaying) return;
+    voicePlaying = true;
+
     voiceAudio.currentTime = 0;
-    voiceAudio.play();
+    bgMusic.pause();
+
+    voiceAudio.play().catch(err => {
+        console.log("语音播放失败", err);
+        voicePlaying = false;
+        bgMusic.play();
+    });
 });
 
-// 语音结束恢复背景音乐
+// 语音播放完毕，恢复背景音乐 + 解锁按钮
 voiceAudio.addEventListener('ended', function(){
-    if(bgIsPlaying){
-        bgMusic.play();
-    }
+    voicePlaying = false;
+    bgMusic.play();
 });
 </script>
 </body>

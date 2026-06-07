@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生日快乐✨</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            min-height:100vh;
+            background: linear-gradient(160deg,#ffe6f2,#fff0f8,#ffd6e8);
+            overflow:hidden;
+            font-family:"幼圆","微软雅黑",sans-serif;
+            position:relative;
+        }
+        body::before{
+            content:"生日快乐 生日快乐 生日快乐";
+            position:fixed;
+            inset:0;
+            font-family:"幼圆","华文琥珀",sans-serif;
+            font-size:36px;
+            color:#ffc9dd;
+            opacity:0.22;
+            word-spacing:60px;
+            line-height:90px;
+            z-index:0;
+            transform:rotate(-12deg);
+            white-space:pre-wrap;
+        }
+        .heart{
+            position:fixed;
+            color:#ff88bb;
+            opacity:0.7;
+            animation:fall linear infinite;
+            z-index:1;
+        }
+        @keyframes fall{
+            0%{transform:translateY(0) rotate(0deg);}
+            100%{transform:translateY(105vh) rotate(360deg);}
+        }
+        .candy{
+            position:absolute;
+            font-size:55px;
+            animation:float 4s ease-in-out infinite alternate;
+            z-index:2;
+        }
+        @keyframes float{
+            from{transform:translateY(0)}
+            to{transform:translateY(-25px)}
+        }
+        .wrap{
+            width:90%;
+            max-width:600px;
+            margin:15vh auto 0;
+            text-align:center;
+            position:relative;
+            z-index:5;
+        }
+        h1{
+            font-family:"华文琥珀","幼圆",sans-serif;
+            font-size:clamp(1.8rem,7vw,3.2rem);
+            color:#ff5c99;
+            text-shadow:2px 2px 4px #ffc6dd;
+            animation:beat 1.2s ease-in-out infinite;
+            margin-bottom:20px;
+            letter-spacing:3px;
+        }
+        @keyframes beat{
+            0%,100%{transform:scale(1)}
+            50%{transform:scale(1.05)}
+        }
+        .text{
+            font-size:clamp(1rem,4vw,1.3rem);
+            color:#d64d88;
+            line-height:2;
+            background:rgba(255,255,255,0.55);
+            padding:25px 20px;
+            border-radius:30px;
+            border:2px solid #ffc8e0;
+            box-shadow:0 5px 18px #ffd0e280;
+        }
+        .bow{
+            font-size:40px;
+            margin:15px 0;
+        }
+        .wish{
+            margin-top:22px;
+            font-size:1.1rem;
+            color:#c73e79;
+        }
+        .open-btn{
+            margin-top:30px;
+            padding:12px 32px;
+            border:none;
+            background:#ff87b2;
+            color:#fff;
+            font-size:16px;
+            border-radius:50px;
+            cursor:pointer;
+            box-shadow:0 4px 12px #ffb8d0;
+            transition:0.3s;
+            font-family:"幼圆";
+        }
+        .open-btn:hover{
+            background:#ff5c99;
+            transform:scale(1.05);
+        }
+        .letter-box{
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,0.35);
+            display:none;
+            z-index:99;
+            align-items:center;
+            justify-content:center;
+            padding:20px;
+        }
+        .letter-content{
+            width:100%;
+            max-width:520px;
+            background:#fff7fb;
+            padding:40px 30px;
+            border-radius:26px;
+            border:3px solid #ffc8e0;
+            color:#b84477;
+            line-height:2;
+        }
+        .gift-btn{
+            margin-top:20px;
+            padding:10px 28px;
+            border:0;
+            background:#ffb2d0;
+            color:#fff;
+            border-radius:30px;
+            cursor:pointer;
+            font-family:"幼圆";
+            font-size:15px;
+        }
+        .gift-btn:hover{
+            background:#ff87b2;
+        }
+        .close{
+            margin-top:25px;
+            padding:8px 24px;
+            border:0;
+            background:#ffacc9;
+            color:white;
+            border-radius:30px;
+            cursor:pointer;
+            font-family:"幼圆";
+        }
+        .gift-box{
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,0.4);
+            display:none;
+            z-index:100;
+            align-items:center;
+            justify-content:center;
+            padding:20px;
+        }
+        .gift-content{
+            max-width:500px;
+            width:100%;
+            background:#ffeaf4;
+            padding:35px 30px;
+            border-radius:26px;
+            border:3px solid #ffb9d3;
+            color:#b03e70;
+            line-height:2;
+        }
+        .big-more-btn{
+            display:none;
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            padding:20px 45px;
+            font-size:22px;
+            border:none;
+            background:#ff6b9e;
+            color:#fff;
+            border-radius:60px;
+            cursor:pointer;
+            font-family:"幼圆";
+            box-shadow:0 5px 20px #ffb3cc;
+        }
+        .new-letter-box{
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,0.35);
+            display:none;
+            z-index:101;
+            align-items:center;
+            justify-content:center;
+            padding:20px;
+        }
+        .new-letter-content{
+            width:100%;
+            max-width:520px;
+            background:#fff0f6;
+            padding:40px 30px;
+            border-radius:26px;
+            border:3px solid #ffb9d3;
+            color:#a83b6b;
+            line-height:2;
+        }
+        audio{display:none;}
+    </style>
+</head>
+<body>
+<div class="candy" style="left:5%;top:10%;">🍩</div>
+<div class="candy" style="right:7%;top:14%;animation-delay:0.8s;">🍭</div>
+<div class="candy" style="left:12%;top:65%;animation-delay:1.5s;">🍫</div>
+<div class="candy" style="left:82%;top:55%;animation-delay:2s;">🍩</div>
+<div class="candy" style="left:3%;top:38%;animation-delay:1s;">🍭</div>
+
+<div class="wrap" id="mainWrap">
+    <div class="bow">🎀🎀🎀</div>
+    <h1>祝我们的小公主，生日快乐！</h1>
+    <div class="text">
+        愿所有美好如期而至💖<br>
+        平安喜乐，万事顺遂<br>
+        天天开心，可爱常在✨
+    </div>
+    <div class="wish">岁岁无忧 · 被温柔包围</div>
+    <button class="open-btn" id="openLetter">💌点开专属小信件</button>
+    <div class="bow" style="margin-top:25px;">🎂🍰💐</div>
+</div>
+
+<button class="big-more-btn" id="bigMoreBtn">你以为这就没了吗？</button>
+
+<div class="letter-box" id="letterModal">
+    <div class="letter-content">
+        <h3>致我的小公主💖</h3>
+        <p>新的一岁，愿你被世间所有温柔偏爱，没有烦恼，日日欢喜。<br>
+        保持热爱，奔赴自己的小美好，岁岁平安，永远闪闪发光。<br>
+并且希望你可以顺利的拿到属于你的录取通知书，你可以克服重重困难，踏遍千山万水，抵达你所想要的终点✨<br>
+✧٩(ˊωˋ*)و✧</p >
+        <button class="gift-btn" id="openGift">🎁打开生日礼物</button>
+    </div>
+</div>
+
+<div class="gift-box" id="giftModal">
+    <div class="gift-content">
+        <h3>专属生日礼物🎁</h3>
+        <p>这是一串神奇的代码~<br>
+（ ˙³˙）<br>
+76941530316440<br>
+找到它正确的位置，你将会在一个神秘的地方，都属于你专属的礼物!!!<br>
+୧(´▽`★)୭</p >
+        <button class="close" id="closeGift">收好礼物啦</button>
+    </div>
+</div>
+
+<div class="new-letter-box" id="newLetterModal">
+    <div class="new-letter-content">
+        <h3>隐藏的第二封来信💌</h3>
+        <p>叮咚~其实还有第二串代码‼(•'╻'• ۶)۶<br>
+YT3462595117338<br>
+准备好了吗，感受神秘力量，你会在同一个地方接受到这份神秘礼物~<br>
+ദ്ദി˶ｰ̀֊ｰ́ )✧</p >
+        <button class="close" id="closeNewLetter">看完啦</button>
+    </div>
+</div>
+
+<script>
+
+function createHeart(){
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerText = '❤';
+    heart.style.left = Math.random()*100 + '%';
+    heart.style.fontSize = Math.random()*20+12+'px';
+    heart.style.animationDuration = Math.random()*3+3+'s';
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000)
+}
+setInterval(createHeart,300)
+
+const openLetter = document.getElementById('openLetter');
+const letterModal = document.getElementById('letterModal');
+const openGift = document.getElementById('openGift');
+const giftModal = document.getElementById('giftModal');
+const closeGift = document.getElementById('closeGift');
+const mainWrap = document.getElementById('mainWrap');
+const bigMoreBtn = document.getElementById('bigMoreBtn');
+const newLetterModal = document.getElementById('newLetterModal');
+const closeNewLetter = document.getElementById('closeNewLetter');
+
+openLetter.onclick = ()=> letterModal.style.display = 'flex';
+openGift.onclick = ()=> giftModal.style.display = 'flex';
+
+closeGift.onclick = function(){
+    giftModal.style.display = 'none';
+    letterModal.style.display = 'none';
+    mainWrap.style.display = 'none';
+    bigMoreBtn.style.display = 'block';
+}
+
+bigMoreBtn.onclick = ()=> newLetterModal.style.display = 'flex';
+
+closeNewLetter.onclick = function(){
+    newLetterModal.style.display = 'none';
+    bigMoreBtn.style.display = 'none';
+    mainWrap.style.display = 'block';
+}
+</script>
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+
+
+<script>
+const bgMusic = document.getElementById('bgMusic');
+document.addEventListener('click', () => {
+  bgMusic.play().catch(e=>console.log("播放拦截：",e));
+}, { once: true });
+</script>
+</body>
+</html>
